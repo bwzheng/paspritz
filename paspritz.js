@@ -25,6 +25,10 @@ imgur.setCredentials('bowenzheng1998@gmail.com', 'passengeravenue2016', '4850c7f
 var port = process.env.PORT || 8080;
 
 app.post('/webhook', function (req, res) {
+  res.send({
+    speech: "Just a second",
+    displayText: "Just a second"
+  });
   var intent = req.body.result.metadata.intentName
   var params = req.body.result.parameters
   if (intent == "Do url"){
