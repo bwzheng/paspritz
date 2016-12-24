@@ -189,9 +189,9 @@ function receivedMessage(event) {
         sendTextMessage(senderID, messageText);
     }
   } else if (messageAttachments) {
-    if (messageAttachments.hasOwnProperty('url')) {
+    if (messageAttachments[0].hasOwnProperty('url')) {
       console.log("Hello");
-      request(messageAttachments.url, function (error, response, body) {
+      request(messageAttachments[0].url, function (error, response, body) {
         if (!error && response.statusCode == 200) {
           var data = extractor(body);
           spritzify(data.text, function () {
