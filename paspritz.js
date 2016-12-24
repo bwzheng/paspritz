@@ -174,32 +174,32 @@ function receivedMessage(event) {
     sendTextMessage(senderID, "Message with attachment received");
   }
   //console.log("Message data: ", event.message);
-  //request(params.url, function (error, response, body) {
-    if (!error && response.statusCode == 200) {
-      var data = extractor(body);
-      spritzify(data.text, function () {
-        imgur.uploadFile(gifname)
-          .then(function (json) {
-              console.log(json.data.link);
-              fs.unlinkSync(gifname);
-              res.send({
-                speech: "Here's the article",
-                displayText: json.data.link,
-                source: "Imgur"
-              });
-          })
-          .catch(function (err) {
-              console.error(err.message);
-              fs.unlinkSync(gifname);
-              res.send({
-                speech: "Something's wrong, please try again.",
-                displayText: "Something's wrong, please try again.",
-              });
-          });
-      });
-
-    }
-  })
+  // request(params.url, function (error, response, body) {
+  //   if (!error && response.statusCode == 200) {
+  //     var data = extractor(body);
+  //     spritzify(data.text, function () {
+  //       imgur.uploadFile(gifname)
+  //         .then(function (json) {
+  //             console.log(json.data.link);
+  //             fs.unlinkSync(gifname);
+  //             res.send({
+  //               speech: "Here's the article",
+  //               displayText: json.data.link,
+  //               source: "Imgur"
+  //             });
+  //         })
+  //         .catch(function (err) {
+  //             console.error(err.message);
+  //             fs.unlinkSync(gifname);
+  //             res.send({
+  //               speech: "Something's wrong, please try again.",
+  //               displayText: "Something's wrong, please try again.",
+  //             });
+  //         });
+  //     });
+  //
+  //   }
+  // })
 }
 
 function spritzify(input, callback){
