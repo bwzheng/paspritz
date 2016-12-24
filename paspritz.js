@@ -190,6 +190,7 @@ function receivedMessage(event) {
     }
   } else if (messageAttachments) {
     if (messageAttachments.hasOwnProperty('url')) {
+      console.log("Hello");
       request(messageAttachments.url, function (error, response, body) {
         if (!error && response.statusCode == 200) {
           var data = extractor(body);
@@ -209,8 +210,10 @@ function receivedMessage(event) {
 
         }
       })
+    } else {
+      sendTextMessage(senderID, "Message with attachment received");
     }
-    sendTextMessage(senderID, "Message with attachment received");
+
   }
   //console.log("Message data: ", event.message);
 
