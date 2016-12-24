@@ -22,7 +22,7 @@ myImage.src = 'download.png';
 var imgur = require('imgur');
 imgur.setCredentials('bowenzheng1998@gmail.com', 'passengeravenue2016', '4850c7facaa6e89');
 //Lets define a port we want to listen to
-const PORT=80;
+var port = process.env.PORT || 8080;
 
 app.post('/webhook', function (req, res) {
   var intent = req.body.result.metadata.intentName
@@ -225,6 +225,6 @@ function pivot(word){
     ctx.fillText(end, indent + startwidth.width + middlewidth.width, 96);
 }
 
-app.listen(PORT, function () {
-  console.log('Listening on port 80!')
+app.listen(port, function () {
+  console.log('Listening on port ' +  port);
 })
