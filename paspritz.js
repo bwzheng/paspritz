@@ -158,6 +158,7 @@ function receivedMessage(event) {
   var messageText = message.text;
   var messageAttachments = message.attachments;
 
+  console.log(messageAttachments);
   if (messageText) {
 
     // If we receive a text message, check to see if it matches a keyword
@@ -171,7 +172,6 @@ function receivedMessage(event) {
         sendTextMessage(senderID, messageText);
     }
   } else if (messageAttachments) {
-    console.log(messageAttachments);
     sendTextMessage(senderID, "Message with attachment received");
   }
   //console.log("Message data: ", event.message);
