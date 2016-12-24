@@ -4,7 +4,6 @@ var app = express();
 var bodyParser = require('body-parser');
 var request = require('request');
 var randomstring = require("randomstring");
-var path = require('path');
 app.use(bodyParser.urlencoded({
     extended: true
 }));
@@ -129,7 +128,6 @@ function spritzify(input, callback){
       encoder.addFrame(ctx);
     }
     encoder.finish();
-    console.log("Hey");
     callback()
     // var currentWord = 0;
     // var running = true;
