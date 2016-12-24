@@ -24,6 +24,17 @@ imgur.setCredentials('bowenzheng1998@gmail.com', 'passengeravenue2016', '4850c7f
 //Lets define a port we want to listen to
 var port = process.env.PORT || 8080;
 
+app.get('/webhook', function(req, res) {
+  if (req.query['hub.mode'] === 'subscribe' &&
+      req.query['hub.verify_token'] === <VERIFY_TOKEN>) {
+    console.log("Validating webhook");
+    res.status(200).send(req.query['hub.challenge']);
+  } else {
+    console.error("Failed validation. Make sure the validation tokens match.");
+    res.sendStatus(403);
+  }
+});
+
 app.post('/webhook', function (req, res) {
   res.send({
     speech: "Just a second",
