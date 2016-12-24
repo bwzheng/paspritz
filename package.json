@@ -1,0 +1,23 @@
+{
+  "name": "paspritz",
+  "version": "1.0.0",
+  "description": "",
+  "main": "paspritz.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "canvas": "^1.6.2",
+    "express": "^4.14.0",
+    "imgur": "^0.2.0",
+    "randomstring": "^1.1.5",
+    "request": "^2.79.0",
+    "unfluff": "^1.1.0"
+  },
+  "engines": {
+    "node": "4.4.7"
+  },
+}
