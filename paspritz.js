@@ -127,6 +127,23 @@ function sendTextMessage(recipientId, messageText) {
   callSendAPI(messageData);
 }
 
+function sendAttachmentMessage(recipientId, messageText){
+  var messageData = {
+    recipient:{
+      id:recipientId
+    },
+    "message":{
+      "attachment":{
+        "type":"image",
+        "payload":{
+          "url":messageText
+        }
+      }
+    }
+  }
+  callSendAPI(messageData);
+}
+
 function callSendAPI(messageData) {
   request({
     uri: 'https://graph.facebook.com/v2.6/me/messages',
@@ -172,35 +189,31 @@ function receivedMessage(event) {
         sendTextMessage(senderID, messageText);
     }
   } else if (messageAttachments) {
+    if (messageAttachments.hasOwnProperty('url')) {
+      request(messageAttachments.url, function (error, response, body) {
+        if (!error && response.statusCode == 200) {
+          var data = extractor(body);
+          spritzify(data.text, function () {
+            imgur.uploadFile(gifname)
+              .then(function (json) {
+                  console.log(json.data.link);
+                  fs.unlinkSync(gifname);
+                  sendAttachmentMessage(senderID, json.data.link);
+              })
+              .catch(function (err) {
+                  console.error(err.message);
+                  fs.unlinkSync(gifname);
+                  sendTextMessage(senderID, "Something's wrong, please try again.");
+              });
+          });
+
+        }
+      })
+    }
     sendTextMessage(senderID, "Message with attachment received");
   }
   //console.log("Message data: ", event.message);
-  // request(params.url, function (error, response, body) {
-  //   if (!error && response.statusCode == 200) {
-  //     var data = extractor(body);
-  //     spritzify(data.text, function () {
-  //       imgur.uploadFile(gifname)
-  //         .then(function (json) {
-  //             console.log(json.data.link);
-  //             fs.unlinkSync(gifname);
-  //             res.send({
-  //               speech: "Here's the article",
-  //               displayText: json.data.link,
-  //               source: "Imgur"
-  //             });
-  //         })
-  //         .catch(function (err) {
-  //             console.error(err.message);
-  //             fs.unlinkSync(gifname);
-  //             res.send({
-  //               speech: "Something's wrong, please try again.",
-  //               displayText: "Something's wrong, please try again.",
-  //             });
-  //         });
-  //     });
-  //
-  //   }
-  // })
+
 }
 
 function spritzify(input, callback){
