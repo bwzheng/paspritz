@@ -111,7 +111,7 @@ function sendGenericMessage(recipientId, messageText) {
     };
 
     callSendAPI(messageData);
-  
+
 }
 
 function sendTextMessage(recipientId, messageText) {
@@ -171,6 +171,7 @@ function receivedMessage(event) {
         sendTextMessage(senderID, messageText);
     }
   } else if (messageAttachments) {
+    console.log(messageAttachments);
     sendTextMessage(senderID, "Message with attachment received");
   }
   //console.log("Message data: ", event.message);
