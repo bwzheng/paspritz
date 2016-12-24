@@ -10,7 +10,6 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json());
 var extractor = require('unfluff');
-var sharp = require('sharp');
 const fs = require('fs');
 var Canvas = require('canvas')
   , Image = Canvas.Image
