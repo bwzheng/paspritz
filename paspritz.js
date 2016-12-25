@@ -211,16 +211,16 @@ function receivedMessage(event) {
                    aid: '1268646',
                    from: 'file' } };
 
-            request(options, function (error, response, body) {
-                if (error) {
-                  console.log(error);
+            request(options, function (erro, resp, imgBody) {
+                if (erro) {
+                  console.log(erro);
                   fs.unlinkSync(gifname);
                   sendTextMessage(senderID, "Something's wrong, please try again.");
+                } else {
+                  console.log(imgBody);
+                  fs.unlinkSync(gifname);
+                  sendAttachmentMessage(senderID, imgBody.linkurl);
                 }
-                console.log(body);
-                console.log(response);
-                fs.unlinkSync(gifname);
-                sendAttachmentMessage(senderID, response.linkurl);
               });
           });
 
