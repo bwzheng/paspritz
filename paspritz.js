@@ -20,8 +20,7 @@ var GIFEncoder = require('gifencoder');
 var gifname = '';
 var myImage = new Image();
 myImage.src = 'download.png';
-var imgur = require('imgur');
-imgur.setCredentials('bowenzheng1998@gmail.com', 'passengeravenue2016', '4850c7facaa6e89');
+
 //Lets define a port we want to listen to
 var port = process.env.PORT || 8080;
 
@@ -160,8 +159,8 @@ function callSendAPI(messageData) {
         messageId, recipientId);
     } else {
       console.error("Unable to send message.");
-      console.error(response);
-      console.error(error);
+      // console.error(response);
+      // console.error(error);
     }
   });
 }
@@ -190,7 +189,6 @@ function receivedMessage(event) {
     }
   } else if (messageAttachments) {
     if (messageAttachments[0].hasOwnProperty('url')) {
-      console.log("Hello");
       request(messageAttachments[0].url, function (error, response, body) {
         if (!error && response.statusCode == 200) {
           var data = extractor(body);
