@@ -208,7 +208,7 @@ function receivedMessage(event) {
                    deadline: '1420041660',
                    aid: '1268646',
                    from: 'file' } };
-
+            console.log(options);
             request(options, function (erro, resp, imgBody) {
                 if (erro) {
                   console.log(erro);
