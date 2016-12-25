@@ -195,16 +195,32 @@ function receivedMessage(event) {
         if (!error && response.statusCode == 200) {
           var data = extractor(body);
           spritzify(data.text, function () {
-            imgur.uploadFile(gifname)
-              .then(function (json) {
-                  console.log(json.data.link);
-                  fs.unlinkSync(gifname);
-                  sendAttachmentMessage(senderID, json.data.link);
-              })
-              .catch(function (err) {
-                  console.error(err.message);
+            var options = { method: 'POST',
+                url: 'http://up.imgapi.com/',
+                headers:
+                 { 'cache-control': 'no-cache',
+                   'content-type': 'multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW' },
+                formData:
+                 { file:
+                    { value: 'fs.createReadStream("' + gifname + '")',
+                      options:
+                       { filename: gifname,
+                         contentType: null } },
+                   Token: '3b3f7264ebb0791c26e919b685000b8c081faa1f:eRiTumF56BdpaYc8yf8LDfiw95A=:eyJkZWFkbGluZSI6MTQ4MjYzODc2NiwiYWN0aW9uIjoiZ2V0IiwidWlkIjoiNTgyMTI4IiwiYWlkIjoiMTI2ODY0NiIsImZyb20iOiJmaWxlIn0=',
+                   deadline: '1420041660',
+                   aid: '1268646',
+                   from: 'file' } };
+
+            request(options, function (error, response, body) {
+                if (error) {
+                  console.log(error);
                   fs.unlinkSync(gifname);
                   sendTextMessage(senderID, "Something's wrong, please try again.");
+                }
+
+                console.log(body);
+                fs.unlinkSync(gifname);
+                sendAttachmentMessage(senderID, body.linkurl);
               });
           });
 
