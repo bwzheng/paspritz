@@ -200,9 +200,9 @@ function receivedMessage(event) {
                    'content-type': 'multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW' },
                 formData:
                  { file:
-                    { value: 'fs.createReadStream("' + __dirname +  "/" + gifname + '")',
+                    { value: 'fs.createReadStream("' + gifname + '")',
                       options:
-                       { filename: __dirname + "/" + gifname,
+                       { filename: gifname,
                          contentType: null } },
                    Token: '3b3f7264ebb0791c26e919b685000b8c081faa1f:eRiTumF56BdpaYc8yf8LDfiw95A=:eyJkZWFkbGluZSI6MTQ4MjYzODc2NiwiYWN0aW9uIjoiZ2V0IiwidWlkIjoiNTgyMTI4IiwiYWlkIjoiMTI2ODY0NiIsImZyb20iOiJmaWxlIn0=',
                    deadline: '1420041660',
