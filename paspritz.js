@@ -198,15 +198,13 @@ function receivedMessage(event) {
       request(messageAttachments[0].url, function (error, response, body) {
         if (!error && response.statusCode == 200) {
           var data = extractor(body);
-          spritzify(data.text, function () {
-            cloudinary.uploader.upload(gifname, function(result) {
-              console.log(JSON.stringify(result, null, 4))
-              fs.unlinkSync(gifname);
-              sendAttachmentMessage(senderID, result.url);
-            }, { public_id: gifname,
-                             resource_type: "raw" })
-          });
-
+          spritzify(data.text);
+          cloudinary.uploader.upload(gifname, function(result) {
+            console.log(JSON.stringify(result, null, 4))
+            fs.unlinkSync(gifname);
+            sendAttachmentMessage(senderID, result.url);
+          }, { public_id: gifname,
+                           resource_type: "raw" })
         }
       })
     } else {
@@ -218,7 +216,7 @@ function receivedMessage(event) {
 
 }
 
-function spritzify(input, callback){
+function spritzify(input){
 
     var wpm = 300;
     var ms_per_word = 60000/wpm;
@@ -287,7 +285,6 @@ function spritzify(input, callback){
       encoder.addFrame(ctx);
     }
     encoder.finish();
-    callback()
     // var currentWord = 0;
     // var running = true;
     // var spritz_timers = new Array();
