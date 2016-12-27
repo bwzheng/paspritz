@@ -284,7 +284,7 @@ function spritzify(input){
       encoder.addFrame(ctx);
     }
     encoder.finish();
-    console.log("finished");
+    console.log(gifname);
     // var currentWord = 0;
     // var running = true;
     // var spritz_timers = new Array();
