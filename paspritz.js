@@ -4,6 +4,7 @@ var app = express();
 var bodyParser = require('body-parser');
 var request = require('request');
 var randomstring = require("randomstring");
+var cloudinary = require('cloudinary');
 var PAGE_ACCESS_TOKEN = "EAARMDbQZCF4MBAFa0dOGjpPKlZBH7uZAu5vsOx54qF1OpoK36D6TlyLXkFqorkfApSZAfRb7ixrCfOHA0wvV3XHWrj5bItaJ9w1CQIWVKKuKRGxSnj6wmbI8NYSCVtSZA1ChjHV1QRbSsqqC8pi2dNfBvMpWhakSjIvqtMlemlQZDZD"
 app.use(bodyParser.urlencoded({
     extended: true
@@ -193,29 +194,11 @@ function receivedMessage(event) {
         if (!error && response.statusCode == 200) {
           var data = extractor(body);
           spritzify(data.text, function () {
-            var options = { method: 'POST',
-                url: 'http://up.imgapi.com/',
-                headers:
-                 { 'cache-control': 'no-cache',
-                   'content-type': 'multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW' },
-                formData:
-                 { file: fs.createReadStream(__dirname + "/" + gifname),
-                   Token: '3b3f7264ebb0791c26e919b685000b8c081faa1f:eRiTumF56BdpaYc8yf8LDfiw95A=:eyJkZWFkbGluZSI6MTQ4MjYzODc2NiwiYWN0aW9uIjoiZ2V0IiwidWlkIjoiNTgyMTI4IiwiYWlkIjoiMTI2ODY0NiIsImZyb20iOiJmaWxlIn0=',
-                   deadline: '1420041660',
-                   aid: '1268646',
-                   from: 'file' } };
-            console.log(options);
-            request(options, function (erro, resp, imgBody) {
-                if (erro) {
-                  console.log(erro);
-                  fs.unlinkSync(gifname);
-                  sendTextMessage(senderID, "Something's wrong, please try again.");
-                } else {
-                  console.log(imgBody);
-                  fs.unlinkSync(gifname);
-                  sendAttachmentMessage(senderID, imgBody.linkurl);
-                }
-              });
+            cloudinary.uploader.upload(gifname, function(result) {
+              console.log(result)
+              fs.unlinkSync(gifname);
+              sendAttachmentMessage(senderID, result.url);
+            })
           });
 
         }
