@@ -200,7 +200,7 @@ function receivedMessage(event) {
           var data = extractor(body);
           spritzify(data.text, function () {
             cloudinary.uploader.upload(gifname, function(result) {
-              console.log(result)
+              console.log("test" + result)
               fs.unlinkSync(gifname);
               sendAttachmentMessage(senderID, result.url);
             })
