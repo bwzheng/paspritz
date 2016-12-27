@@ -204,7 +204,7 @@ function receivedMessage(event) {
               fs.unlinkSync(gifname);
               sendAttachmentMessage(senderID, result.url);
             }, { public_id: gifname,
-                             resource_type: "gif" })
+                             resource_type: "raw" })
           });
 
         }
