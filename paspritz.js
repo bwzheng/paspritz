@@ -203,8 +203,7 @@ function receivedMessage(event) {
             console.log(JSON.stringify(result, null, 4))
             fs.unlinkSync(gifname);
             sendAttachmentMessage(senderID, result.url);
-          }, { public_id: gifname,
-                           resource_type: "raw" })
+          })
         }
       })
     } else {
