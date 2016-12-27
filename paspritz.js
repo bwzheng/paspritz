@@ -5,6 +5,11 @@ var bodyParser = require('body-parser');
 var request = require('request');
 var randomstring = require("randomstring");
 var cloudinary = require('cloudinary');
+cloudinary.config({
+  cloud_name: 'dxvi5x7yo',
+  api_key: '927284733168267',
+  api_secret: 'N6eeV39X6iAxVw7LYpLzFJSHREw'
+});
 var PAGE_ACCESS_TOKEN = "EAARMDbQZCF4MBAFa0dOGjpPKlZBH7uZAu5vsOx54qF1OpoK36D6TlyLXkFqorkfApSZAfRb7ixrCfOHA0wvV3XHWrj5bItaJ9w1CQIWVKKuKRGxSnj6wmbI8NYSCVtSZA1ChjHV1QRbSsqqC8pi2dNfBvMpWhakSjIvqtMlemlQZDZD"
 app.use(bodyParser.urlencoded({
     extended: true
