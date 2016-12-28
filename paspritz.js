@@ -28,7 +28,7 @@ var myImage = new Image();
 myImage.src = 'download.png';
 
 //Lets define a port we want to listen to
-var port = process.env.PORT || 8080;
+var port = process.env.PORT || 3000;
 
 app.get('/webhook', function(req, res) {
   if (req.query['hub.mode'] === 'subscribe' &&
