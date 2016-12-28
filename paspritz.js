@@ -41,7 +41,6 @@ app.post('/message', function (req, res) {
           console.log(JSON.stringify(result, null, 4))
           fs.unlinkSync(gifname);
           res.json({link: result.url});
-          res.sendStatus(200);
         })
       });
 
