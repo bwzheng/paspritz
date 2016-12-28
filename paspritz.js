@@ -32,7 +32,7 @@ var port = process.env.PORT || 3000;
 
 app.post('/message', function (req, res) {
   var data = req.body;
-  console.log(data);
+  console.log(req);
   request(data.url, function (error, response, body) {
     if (!error && response.statusCode == 200) {
       var data = extractor(body);
